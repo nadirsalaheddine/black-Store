@@ -1,274 +1,569 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLACK STORE | Future Premium Fashion</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Black Store | Premium Futuristic Shop</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-dark: #09090b;
+            --panel-glass: rgba(18, 18, 24, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --neon-purple: #a855f7;
+            --neon-blue: #3b82f6;
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, var(--bg-dark) 70%);
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: var(--panel-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* اللوغو الدوار حول نفسه */
+        .rotating-logo {
+            width: 25px;
+            height: 25px;
+            border: 3px solid var(--neon-blue);
+            border-top: 3px solid var(--neon-purple);
+            border-radius: 50%;
+            animation: spin 3s linear infinite;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .cart-icon-wrapper {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--neon-purple);
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-color: transparent;
+            color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* --- MAIN STORE SHELVES --- */
+        .store-container {
+            padding: 4rem 5%;
+        }
+
+        .shelf-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--neon-purple);
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* كل رف يحتوي على 5 منتجات مصفوفة بشكل مرن ومتجاوب */
+        .shelf-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 1200px) {
+            .shelf-grid { grid-template-columns: repeat(3, 1fr); }
+            .hero h1 { font-size: 3rem; }
+        }
+        @media (max-width: 768px) {
+            .shelf-grid { grid-template-columns: repeat(2, 1fr); }
+            nav { padding: 1rem 5%; }
+        }
+        @media (max-width: 480px) {
+            .shelf-grid { grid-template-columns: repeat(1, 1fr); }
+            .hero h1 { font-size: 2.2rem; }
+        }
+
+        /* --- PRODUCT CARD (Glassmorphism + Interactive 3D Effect) --- */
+        .product-card {
+            background: var(--panel-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1), border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .product-card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+        }
+
+        /* صندوق الرسم التوضيحي البديل عن الصور العشوائية */
+        .product-visual-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+            transition: transform 0.5s;
+        }
+
+        .product-visual-box i {
+            font-size: 3.5rem;
+            color: var(--text-muted);
+            transition: transform 0.5s, color 0.3s;
+        }
+
+        /* انيميشن خفيف للمنتج عند الـ Hover */
+        .product-card:hover .product-visual-box i {
+            transform: scale(1.15) rotate(5deg);
+            color: var(--neon-blue);
+        }
+
+        .product-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .product-info p {
+            color: var(--neon-purple);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .add-to-cart-btn {
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-purple));
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* --- FLOATING CART SIDEBAR --- */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: rgba(10, 10, 14, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid var(--border-glass);
+            z-index: 200;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .close-cart {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-footer {
+            border-top: 1px solid var(--border-glass);
+            padding-top: 20px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+        }
+
+        /* --- FOOTER & CONTACT (Fake Panels) --- */
+        footer {
+            background: rgba(5, 5, 8, 0.8);
+            border-top: 1px solid var(--border-glass);
+            padding: 3rem 5% 1.5rem 5%;
+            margin-top: 5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 3rem;
+        }
+
+        .footer-panel {
+            background: var(--panel-glass);
+            border: 1px solid var(--border-glass);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .footer-panel i {
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+        }
+
+        .footer-panel h4 { margin-bottom: 10px; font-size: 1.1rem; }
+        .footer-panel p { color: var(--text-muted); font-size: 0.9rem; }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .copyright span {
+            color: var(--neon-purple);
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="bg-glow-1"></div>
-    <div class="bg-glow-2"></div>
-
-    <header class="navbar-header">
+    <!-- NAVBAR -->
+    <nav>
         <div class="logo-container">
-            <div class="rotating-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="12,2 22,22 2,22" stroke="url(#neon-grad)" stroke-width="2" fill="none"/>
-                    <defs>
-                        <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#00ffff" />
-                            <stop offset="100%" stop-color="#8a2be2" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
-            <span class="brand-name">BLACK <span class="accent-text">STORE</span></span>
+            <div class="rotating-logo"></div>
+            <div class="logo-text">BLACK STORE</div>
         </div>
-
-        <nav class="nav-links">
-            <a href="#shoes">Shoes</a>
-            <a href="#hoodies">Hoodies</a>
-            <a href="#sportswear">Sportswear</a>
-        </nav>
-
         <div class="nav-actions">
-            <button class="lang-btn" id="langToggle">EN</button>
-            <button class="theme-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
-            <div class="cart-icon-wrapper">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="cart-count">0</span>
+            <div class="cart-icon-wrapper" onclick="toggleCart()">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-count" id="cartCount">0</span>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">NEXT-GEN<br>FASHION</h1>
-            <p class="hero-subtitle">Step into the future of premium streetwear.</p>
-            <button class="cta-btn">Explore Collection</button>
-        </div>
-        <div class="hero-3d-placeholder" id="hero-canvas-container">
-            <div class="futuristic-sphere"></div>
-        </div>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1 class="gsap-hero-title">NEXT-GEN<br><span>URBAN FASHION</span></h1>
+        <p class="gsap-hero-desc">اكتشف تجربة تسوق مستقبلية فريدة من نوعها. واجهة غامرة، تصاميم حادة، وسرعة فائقة.</p>
     </section>
 
-    <main class="store-container">
+    <!-- STORE CONTAINER -->
+    <div class="store-container">
 
-        <section class="shelf-section" id="shoes">
-            <h2 class="shelf-title">// PREMIUM SHOES</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-visual shoe-grad-1"></div>
-                    <div class="product-info">
-                        <h3>Cyber Runner X1</h3>
-                        <p class="price">$180.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual shoe-grad-2"></div>
-                    <div class="product-info">
-                        <h3>Neon Stealth Boot</h3>
-                        <p class="price">$210.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual shoe-grad-3"></div>
-                    <div class="product-info">
-                        <h3>Aether Aura Sneaker</h3>
-                        <p class="price">$195.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual shoe-grad-4"></div>
-                    <div class="product-info">
-                        <h3>Vortex High-Top</h3>
-                        <p class="price">$240.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual shoe-grad-5"></div>
-                    <div class="product-info">
-                        <h3>Quantum Knit Slip-on</h3>
-                        <p class="price">$165.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
+        <!-- الرف 1: الأحذية (5 منتجات) -->
+        <h2 class="shelf-title"><i class="fa-solid fa-shoe-prints"></i> Premium Sneakers</h2>
+        <div class="shelf-grid" id="shoes-shelf"></div>
+
+        <!-- الرف 2: الهوديز والملابس الشتوية (5 منتجات) -->
+        <h2 class="shelf-title"><i class="fa-solid fa-shirt"></i> Winter Hoodies & Jackets</h2>
+        <div class="shelf-grid" id="winter-shelf"></div>
+
+        <!-- الرف 3: الملابس الرياضية والـ Tank Tops (5 منتجات) -->
+        <h2 class="shelf-title"><i class="fa-solid fa-bolt"></i> Gym & Tank Tops</h2>
+        <div class="shelf-grid" id="fitness-shelf"></div>
+
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3>
+            <i class="fa-solid fa-xmark close-cart" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- ستضاف العناصر ديناميكياً هنا -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0.00 DA</span>
             </div>
-        </section>
+            <button class="checkout-btn" onclick="triggerCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
 
-        <section class="shelf-section" id="hoodies">
-            <h2 class="shelf-title">// HOODIES & WINTER JACKETS</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-visual hoodie-grad-1"></div>
-                    <div class="product-info">
-                        <h3>Oversized Void Hoodie</h3>
-                        <p class="price">$120.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual hoodie-grad-2"></div>
-                    <div class="product-info">
-                        <h3>Thermal Neo-Puffer</h3>
-                        <p class="price">$280.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual hoodie-grad-3"></div>
-                    <div class="product-info">
-                        <h3>Cyberpunk Windbreaker</h3>
-                        <p class="price">$150.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual hoodie-grad-4"></div>
-                    <div class="product-info">
-                        <h3>Eclipse Heavy Parka</h3>
-                        <p class="price">$310.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual hoodie-grad-5"></div>
-                    <div class="product-info">
-                        <h3>Glitch Knit Sweatshirt</h3>
-                        <p class="price">$95.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="shelf-section" id="sportswear">
-            <h2 class="shelf-title">// SPORTSWEAR & TANK TOPS</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-visual sport-grad-1"></div>
-                    <div class="product-info">
-                        <h3>Krypton Aero Tank</h3>
-                        <p class="price">$45.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual sport-grad-2"></div>
-                    <div class="product-info">
-                        <h3>Compression Cyber-Tights</h3>
-                        <p class="price">$85.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual sport-grad-3"></div>
-                    <div class="product-info">
-                        <h3>Hyper-Vent Track Jacket</h3>
-                        <p class="price">$110.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual sport-grad-4"></div>
-                    <div class="product-info">
-                        <h3>Apex Performance Shorts</h3>
-                        <p class="price">$55.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual sport-grad-5"></div>
-                    <div class="product-info">
-                        <h3>Luxe Tech Tank Top</h3>
-                        <p class="price">$50.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="shelf-section" id="basics">
-            <h2 class="shelf-title">// UNDERWEAR & PREMIUM SOCKS</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-visual basic-grad-1"></div>
-                    <div class="product-info">
-                        <h3>Seamless Matrix Briefs</h3>
-                        <p class="price">$35.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual basic-grad-2"></div>
-                    <div class="product-info">
-                        <h3>Neon Stripe Crew Socks</h3>
-                        <p class="price">$18.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual basic-grad-3"></div>
-                    <div class="product-info">
-                        <h3>Micro-Modal Boxer Briefs</h3>
-                        <p class="price">$38.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual basic-grad-4"></div>
-                    <div class="product-info">
-                        <h3>Compression Quarter Socks</h3>
-                        <p class="price">$20.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-visual basic-grad-5"></div>
-                    <div class="product-info">
-                        <h3>Futura Thermal Base Layer</h3>
-                        <p class="price">$70.00</p>
-                        <button class="add-to-cart-btn">Add To Bag</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="store-footer">
+    <!-- FOOTER -->
+    <footer>
         <div class="footer-grid">
-            <div class="footer-brand">
-                <h3>BLACK STORE</h3>
-                <p>The virtual future of premium fashion design.</p>
+            <div class="footer-panel">
+                <i class="fa-solid fa-headset"></i>
+                <h4>Support</h4>
+                <p>support@blackstore.fake</p>
             </div>
-            <div class="footer-contact">
-                <h4>CONTACT US</h4>
-                <p><i class="fas fa-envelope"></i> contact@blackstore.io</p>
-                <p><i class="fas fa-map-marker-alt"></i> Neo-Tokyo / Cyber Space</p>
+            <div class="footer-panel">
+                <i class="fa-solid fa-location-dot"></i>
+                <h4>Location</h4>
+                <p>Yesser, Boumerdes (Project Orbit)</p>
             </div>
-            <div class="footer-socials">
-                <h4>FOLLOW THE VISION</h4>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                </div>
+            <div class="footer-panel">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h4>Secured Panel</h4>
+                <p>100% Mock Environment for GitHub Portfolio</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>Made by <span class="author-name">Nadir r</span> &copy; 2026</p>
+        <div class="copyright">
+            صنع من طرفي <span>Nadir r</span> &copy; 2026
         </div>
     </footer>
-<script src="main.js"></script>
 
+    <!-- JAVASCRIPT SYSTEM -->
+    <script>
+        // داتا المنتجات المقسمة على 3 رفوف، كل رف فيه 5 عناصر محددة
+        const productsData = {
+            shoes: [
+                { id: 1, name: "X-Velocity Cyber", price: 14500, icon: "fa-solid fa-shoe-prints" },
+                { id: 2, name: "Neon Pulse Runner", price: 12000, icon: "fa-solid fa-shoe-prints" },
+                { id: 3, name: "Shadow Obsidian-X", price: 16800, icon: "fa-solid fa-shoe-prints" },
+                { id: 4, name: "Aether Void Mid", price: 19000, icon: "fa-solid fa-shoe-prints" },
+                { id: 5, name: "Quantum Boot V1", price: 21000, icon: "fa-solid fa-shoe-prints" }
+            ],
+            winter: [
+                { id: 6, name: "Alpha Cyber Hoodie", price: 8500, icon: "fa-solid fa-shirt" },
+                { id: 7, name: "Glow Layer Winter Jacket", price: 13500, icon: "fa-solid fa-vest" },
+                { id: 8, name: "Overcast Heavy Hoodie", price: 9200, icon: "fa-solid fa-shirt" },
+                { id: 9, name: "Thermal Tech Parka", price: 18000, icon: "fa-solid fa-coat" },
+                { id: 10, name: "Glitch Knit Sweater", price: 7800, icon: "fa-solid fa-shirt" }
+            ],
+            fitness: [
+                { id: 11, name: "HyperDry Tank Top", price: 3400, icon: "fa-solid fa-shirt" },
+                { id: 12, name: "Compression Gym Vest", price: 4200, icon: "fa-solid fa-shirt" },
+                { id: 13, name: "Aero-Weave Tank", price: 3100, icon: "fa-solid fa-shirt" },
+                { id: 14, name: "Stealth Training Shorts", price: 4800, icon: "fa-solid fa-socks" },
+                { id: 15, name: "Premium Socks Pack (5x)", price: 2200, icon: "fa-solid fa-socks" }
+            ]
+        };
 
+        let cart = [];
+
+        // دالة لبناء الكروت داخل الرفوف
+        function renderShelf(shelfId, products) {
+            const container = document.getElementById(shelfId);
+            container.innerHTML = products.map(prod => `
+                <div class="product-card gsap-card">
+                    <div class="product-visual-box">
+                        <i class="${prod.icon}"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>${prod.name}</h3>
+                        <p>${prod.price.toLocaleString()} DA</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(${prod.id}, '${prod.name}', ${prod.price})">Add To Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // تشغيل البناء للرفوف الثلاثة
+        renderShelf('shoes-shelf', productsData.shoes);
+        renderShelf('winter-shelf', productsData.winter);
+        renderShelf('fitness-shelf', productsData.fitness);
+
+        // التحكم في فتح وغلق السلة
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('active');
+        }
+
+        // إضافة منتج للسلة وتحديث العداد لايف
+        function addToCart(id, name, price) {
+            cart.push({ id, name, price });
+            document.getElementById('cartCount').innerText = cart.length;
+            updateCartUI();
+            
+            // تأثير خفيف عند الإضافة
+            gsap.fromTo(".cart-icon-wrapper", { scale: 0.8 }, { scale: 1, duration: 0.3, ease: "bounce.out" });
+        }
+
+        // تحديث واجهة السلة وحساب السعر الإجمالي
+        function updateCartUI() {
+            const itemsContainer = document.getElementById('cartItems');
+            itemsContainer.innerHTML = cart.map((item, index) => `
+                <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid var(--border-glass); padding-bottom:10px;">
+                    <div>
+                        <h4>${item.name}</h4>
+                        <span style="color:var(--neon-blue); font-size:0.9rem;">${item.price.toLocaleString()} DA</span>
+                    </div>
+                    <i class="fa-solid fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cartTotal').innerText = total.toLocaleString() + " DA";
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            document.getElementById('cartCount').innerText = cart.length;
+            updateCartUI();
+        }
+
+        function triggerCheckout() {
+            if(cart.length === 0) return alert("Your bag is empty!");
+            alert("✨ Order confirmed — we will contact you soon");
+            cart = [];
+            document.getElementById('cartCount').innerText = 0;
+            updateCartUI();
+            toggleCart();
+        }
+
+        // --- GSAP ANIMATIONS SYSTEM ---
+        window.addEventListener('DOMContentLoaded', () => {
+            // انيميشن الهيرو عند الدخول مباشرة
+            gsap.from(".gsap-hero-title", { opacity: 0, y: 50, duration: 1, ease: "power4.out" });
+            gsap.from(".gsap-hero-desc", { opacity: 0, y: 30, duration: 1, delay: 0.3, ease: "power4.out" });
+
+            // ظهور تدريجي ومحترف للكروت أثناء الـ Scroll
+            gsap.utils.toArray('.gsap-card').forEach(card => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    y: 40,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+            });
+        });
+    </script>
 </body>
 </html>
