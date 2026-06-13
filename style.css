@@ -1,393 +1,87 @@
-/* 🎛️ الألوان والمتغيرات المستقبليّة */
 :root {
-    --bg-color: #0a0a0c;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --border-color: rgba(255, 255, 255, 0.07);
-    --text-main: #ffffff;
-    --text-muted: #88888e;
-    --neon-cyan: #00ffff;
-    --neon-purple: #8a2be2;
-    --neon-glow: drop-shadow(0 0 8px var(--neon-cyan));
+    --bg-base: #0c0b0c;
+    --panel-bg: rgba(22, 19, 20, 0.75);
+    --border-color: rgba(255, 255, 255, 0.05);
+    --text-main: #fdfbf7;
+    --text-muted: #9e9698;
+    
+    /* ألوان نادير الملكية */
+    --color-burgundy: #581c26; 
+    --color-olive: #4a5343;     
+    --color-orange: #d96a3b;    
+    --color-yellow: #fbf3cd;    
+    
+    /* حواف دائرية خفيفة وناعمة (ليست مربعات حادة) */
+    --radius-card: 16px; 
+    --radius-btn: 10px;
 }
 
 [data-theme="light"] {
-    --bg-color: #f4f4f7;
-    --card-bg: rgba(0, 0, 0, 0.03);
-    --border-color: rgba(0, 0, 0, 0.07);
-    --text-main: #121214;
-    --text-muted: #66666e;
+    --bg-base: #faf8f5;
+    --panel-bg: rgba(243, 238, 232, 0.85);
+    --border-color: rgba(0, 0, 0, 0.06);
+    --text-main: #1c1819;
+    --text-muted: #787274;
+    
+    --color-burgundy: #7a2230;
+    --color-olive: #5a6653;
+    --color-orange: #c85324;
+    --color-yellow: #f7eda2;
 }
 
-/* 💀 التنسيق العام */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                color 0.3s ease, 
+                border-color 0.3s ease;
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: var(--bg-base);
     color: var(--text-main);
-    overflow-x: hidden;
-    position: relative;
-    transition: background-color 0.5s ease;
-}
-
-/* ✨ كرات التوهج الخلفية (Glow Background) */
-.bg-glow-1, .bg-glow-2 {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    filter: blur(150px);
-    opacity: 0.15;
-    z-index: -1;
-    pointer-events: none;
-}
-.bg-glow-1 { top: 10%; left: -100px; background: var(--neon-cyan); }
-.bg-glow-2 { top: 60%; right: -100px; background: var(--neon-purple); }
-
-/* 🌐 شريط التنقل (Navbar) Glassmorphism */
-.navbar-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(10, 10, 12, 0.7);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--border-color);
-    z-index: 1000;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* دورت الرسمة حول نفسها بشكل غير منتهي وبسلاسة */
-.rotating-icon {
-    display: flex;
-    align-items: center;
-    animation: infiniteSpin 6s linear infinite;
-}
-
-@keyframes infiniteSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.brand-name {
-    font-weight: 900;
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-}
-
-.accent-text {
-    color: var(--neon-cyan);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-.nav-links a {
-    color: var(--text-main);
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--neon-purple);
-}
-
-.nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.theme-btn, .lang-btn {
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.theme-btn:hover, .lang-btn:hover {
-    border-color: var(--neon-cyan);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
-}
-
-.cart-icon-wrapper {
-    position: relative;
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.cart-count {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background: var(--neon-purple);
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    border-radius: 50%;
-}
-
-/* 🌌 البطل (Hero Section) */
-.hero-section {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 0 5%;
-    padding-top: 80px;
+    overflow-x: hidden;
 }
 
-.hero-content {
-    flex: 1;
+/* تأثير التفاعل الخفيف والارتدادي السريع (Micro-interactions) عند الضغط */
+.btn-bounce {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s, border-color 0.3s;
+}
+.btn-bounce:active {
+    transform: scale(0.94) !important;
 }
 
-.hero-title {
-    font-size: 4.5rem;
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    background: linear-gradient(45deg, #fff 30%, var(--text-muted));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.custom-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
-.hero-subtitle {
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    margin: 20px 0 35px;
+/* أنيميشن نبضي لشاشات التحميل الذكية (CSS3 Animation) */
+.skeleton-pulse {
+    background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+    background-size: 200% 100%;
+    animation: loading-pulse 1.5s infinite linear;
+    border-radius: var(--radius-card);
+}
+[data-theme="light"] .skeleton-pulse {
+    background: linear-gradient(90deg, rgba(0,0,0,0.03) 25%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.03) 75%);
+    background-size: 200% 100%;
 }
 
-.cta-btn {
-    background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan));
-    border: none;
-    color: white;
-    padding: 14px 35px;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
+@keyframes loading-pulse {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
-.cta-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 25px rgba(0, 255, 255, 0.6);
-}
-
-.hero-3d-placeholder {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.futuristic-sphere {
-    width: 280px;
-    height: 280px;
+/* حركة دوران شعار البراند */
+.brand-spinner {
+    border: 2px solid var(--color-olive);
+    border-top: 2px solid var(--color-orange);
+    border-bottom: 2px solid var(--color-burgundy);
     border-radius: 50%;
-    background: radial-gradient(circle, var(--neon-purple), transparent);
-    box-shadow: 0 0 60px rgba(138, 43, 226, 0.6);
+    animation: spin 3.5s linear infinite;
 }
-
-/* 🛍️ الرفوف والمنتجات (5 لكل صف متجاوب) */
-.store-container {
-    padding: 40px 5%;
-}
-
-.shelf-section {
-    margin-bottom: 80px;
-}
-
-.shelf-title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-    color: var(--text-main);
-    border-left: 4px solid var(--neon-cyan);
-    padding-left: 15px;
-}
-
-/* الـ Grid الموزّع لـ 5 منتجات في الصف وبذكاء */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-}
-
-/* تأثير الـ Glassmorphic الفاخر على الكروت */
-.product-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 15px;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
-}
-
-.product-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--neon-cyan);
-    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
-}
-
-/* الأشكال الفنية الراقية كبديل للصور المكسورة */
-.product-visual {
-    height: 200px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* تدرجات النيون الفاخرة لكل صنف */
-.shoe-grad-1 { background: linear-gradient(135deg, #1e1e24, #00ffff); }
-.shoe-grad-2 { background: linear-gradient(135deg, #1e1e24, #8a2be2); }
-.shoe-grad-3 { background: linear-gradient(135deg, #1e1e24, #ff007f); }
-.shoe-grad-4 { background: linear-gradient(135deg, #2a0845, #6441a5); }
-.shoe-grad-5 { background: linear-gradient(135deg, #0f2027, #203a43); }
-
-.hoodie-grad-1 { background: linear-gradient(135deg, #111, #444); }
-.hoodie-grad-2 { background: linear-gradient(135deg, #3a3d40, #181719); }
-.hoodie-grad-3 { background: linear-gradient(135deg, #1d976c, #93f9b9); }
-.hoodie-grad-4 { background: linear-gradient(135deg, #eb3349, #f45c43); }
-.hoodie-grad-5 { background: linear-gradient(135deg, #61045f, #aa076b); }
-
-.sport-grad-1 { background: linear-gradient(135deg, #11998e, #38ef7d); }
-.sport-grad-2 { background: linear-gradient(135deg, #ff9966, #ff5e62); }
-.sport-grad-3 { background: linear-gradient(135deg, #7f00ff, #e100ff); }
-.sport-grad-4 { background: linear-gradient(135deg, #396afc, #2948ff); }
-.sport-grad-5 { background: linear-gradient(135deg, #f857a6, #ff5858); }
-
-.basic-grad-1 { background: linear-gradient(135deg, #4da0b0, #d39d38); }
-.basic-grad-2 { background: linear-gradient(135deg, #134e5e, #71969f); }
-.basic-grad-3 { background: linear-gradient(135deg, #061161, #780206); }
-.basic-grad-4 { background: linear-gradient(135deg, #ffd89b, #19547b); }
-.basic-grad-5 { background: linear-gradient(135deg, #304352, #d7d2cc); }
-
-.product-info h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.price {
-    color: var(--neon-cyan);
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.add-to-cart-btn {
-    width: 100%;
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 10px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.add-to-cart-btn:hover {
-    background: var(--text-main);
-    color: var(--bg-color);
-}
-
-/* 📞 الفوتر (Footer) */
-.store-footer {
-    border-top: 1px solid var(--border-color);
-    padding: 60px 5% 30px;
-    background: rgba(5, 5, 7, 0.5);
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-grid h3, .footer-grid h4 {
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-}
-
-.footer-contact p, .footer-brand p {
-    color: var(--text-muted);
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
-
-.footer-contact i {
-    color: var(--neon-cyan);
-    margin-right: 8px;
-}
-
-.social-icons {
-    display: flex;
-    gap: 15px;
-}
-
-.social-icons a {
-    color: var(--text-main);
-    font-size: 1.3rem;
-    transition: color 0.3s;
-}
-
-.social-icons a:hover {
-    color: var(--neon-purple);
-}
-
-.footer-bottom {
-    border-top: 1px solid var(--border-color);
-    padding-top: 20px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-.author-name {
-    color: var(--neon-cyan);
-    font-weight: bold;
-}
-
-/* 📱 متجاوب تماماً (Responsive Design) */
-@media (max-width: 1200px) {
-    .product-grid { grid-template-columns: repeat(3, 1fr); } /* 3 منتجات على التابلت */
-}
-
-@media (max-width: 768px) {
-    .navbar-header { padding: 15px 5%; }
-    .nav-links { display: none; } /* إخفاء القائمة العادية في الهاتف */
-    .hero-section { flex-direction: column; text-align: center; justify-content: center; }
-    .hero-title { font-size: 3rem; }
-    .hero-3d-placeholder { margin-top: 40px; }
-    .product-grid { grid-template-columns: repeat(2, 1fr); } /* منتجين في الهاتف */
-    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-}
-
-@media (max-width: 480px) {
-    .product-grid { grid-template-columns: 1fr; } /* منتج واحد للهواتف الصغيرة جداً */
-}
+@keyframes spin { 100% { transform: rotate(360deg); } }
