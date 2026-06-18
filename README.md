@@ -38,5 +38,7 @@ black-store/
 ├── app.js         # React logic engine & Asynchronous Mock API Service
 └── README.md      # Documentation & Hub presentation
 
-[اضغط هنا لزيارة المستودع (black-store)](https://github.com/nadirsalaheddine/black-Store)
+---
+
+[![Black-Store-Repo](https://img.shields.io/badge/GitHub-Black--Store-blue?logo=github)](https://github.com/nadirsalaheddine/black-Store)
 
