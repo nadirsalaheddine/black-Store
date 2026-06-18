@@ -24,6 +24,8 @@ An elite, modern, and blazing-fast e-commerce virtual interface optimized with *
 * **Compiler & Bundler:** [Babel Standalone](https://babeljs.io/) (Instant JSX runtime transformation)
 * **Icons & Fonts:** FontAwesome v6.4 & Google Fonts (Plus Jakarta Sans / Cairo)
 
+[![Black-Store-Repo](https://img.shields.io/badge/GitHub-Black--Store-blue?logo=github)](https://github.com/nadirsalaheddine/black-Store)
+
 ---
 
 ## 📁 Project Architecture
@@ -37,8 +39,3 @@ black-store/
 ├── style.css      # Advanced CSS3 variables, animations & themes
 ├── app.js         # React logic engine & Asynchronous Mock API Service
 └── README.md      # Documentation & Hub presentation
-
----
-
-[![Black-Store-Repo](https://img.shields.io/badge/GitHub-Black--Store-blue?logo=github)](https://github.com/nadirsalaheddine/black-Store)
-
