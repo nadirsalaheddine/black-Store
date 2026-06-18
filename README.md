@@ -37,4 +37,6 @@ black-store/
 ├── style.css      # Advanced CSS3 variables, animations & themes
 ├── app.js         # React logic engine & Asynchronous Mock API Service
 └── README.md      # Documentation & Hub presentation
- https://github.com/nadirsalaheddine/black-Store
+
+---
+https://github.com/nadirsalaheddine/black-Store
