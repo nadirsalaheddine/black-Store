@@ -3,18 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Store | Premium Luxury Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Black Store | Premium Streetwear Hub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#0a0a0a] text-white min-h-screen transition-colors duration-300">
-    
-    <div id="root"></div>
+<body>
 
-    <script type="text/babel" src="app.js"></script>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <a href="#" class="logo">
+                    <span class="logo-dot"></span>BLACK STORE
+                </a>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active">Home</a></li>
+                    <li><a href="#" class="nav-link">New Drops</a></li>
+                    <li><a href="#" class="nav-link">Brands</a></li>
+                    <li><a href="#" class="nav-link">Aura Series</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="action-btn" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="action-btn cart-trigger" id="open-cart-btn">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-tag">Summer Drop 2026</span>
+            <h2 class="hero-title">SHAPE THE FUTURE <br>OF STREETWEAR</h2>
+            <p class="hero-subtitle">Explore carefully curated premium aesthetics tailored for the modern generation.</p>
+            <div class="hero-buttons">
+                <a href="#store-section" class="btn btn-primary">Shop The Collection</a>
+                <a href="#" class="btn btn-secondary">Discover Lookbook</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="features-container">
+            <div class="feature-card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Express Delivery</h3>
+                <p>Fast and tracked shipping right to your doorstep.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Secure Checkout</h3>
+                <p>Your transactions are fully encrypted and safe.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-gem"></i>
+                <h3>Premium Quality</h3>
+                <p>Only 100% authentic and verified luxury pieces.</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="store-wrapper" id="store-section">
+        <div class="store-header">
+            <div class="section-heading">
+                <h2 class="section-title">Curated Drops</h2>
+                <p class="section-desc">Handpicked styles from High Streetwear to Old Money trends.</p>
+            </div>
+            <div class="store-filters">
+                <button class="filter-btn active">All Items</button>
+                <button class="filter-btn">Nike</button>
+                <button class="filter-btn">Adidas</button>
+                <button class="filter-btn">High Street</button>
+            </div>
+        </div>
+
+        <div class="products-grid" id="products-target">
+            </div>
+    </main>
+
+    <aside class="cart-sidebar" id="cart-drawer">
+        <div class="cart-sidebar-header">
+            <h2>Your Bag (<span id="cart-total-items">0</span>)</h2>
+            <button class="close-cart-btn" id="close-cart-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        
+        <div class="cart-items-container" id="cart-items-target">
+            <div class="empty-cart-msg">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <p>Your bag is currently empty.</p>
+            </div>
+        </div>
+
+        <div class="cart-sidebar-footer">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span class="total-price-amount" id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn btn-checkout" disabled>Proceed to Checkout</button>
+        </div>
+    </aside>
+
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <p>Designed with absolute precision by <strong>nadirsalahddine</strong> &copy; 2026</p>
+            <div class="footer-socials">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
