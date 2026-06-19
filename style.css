@@ -1,7 +1,6 @@
 /* ==========================================================================
    1. THEME VARIABLES (سيستام الليل والنهار)
    ========================================================================== */
-/* الوضع الليلي الفخم (الافتراضي) */
 body.theme-dark {
     --bg-main: #000000;
     --text-main: #ffffff;
@@ -12,7 +11,6 @@ body.theme-dark {
     --accent-invert: #000000;
 }
 
-/* الوضع الفاتح (تيتانيوم ستايل أبل) */
 body.theme-light {
     --bg-main: #f5f5f7;
     --text-main: #1d1d1f;
@@ -31,7 +29,7 @@ body.theme-light {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
-    transition: background-color 0.4s ease, color 0.4s ease; /* انتقال ناعم بين ليل ونهار */
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 html {
@@ -45,7 +43,7 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: 'Syne', sans-serif; /* الخط الفخم للعناوين */
+    font-family: 'Syne', sans-serif;
 }
 
 a {
@@ -54,12 +52,12 @@ a {
 }
 
 /* ==========================================================================
-   3. APPLE GLASS BLUR UTILITY (تأثير ضبابية أيفون)
+   3. APPLE GLASS BLUR UTILITY
    ========================================================================== */
 .apple-blur {
     background: var(--glass-bg);
     backdrop-filter: blur(25px) saturate(200%);
-    -webkit-backdrop-filter: blur(25px) saturate(200%); /* لمتصفحات سفاري */
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
     border: 1px solid var(--glass-border);
 }
 
@@ -77,10 +75,11 @@ a {
 .nav-container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 15px 30px;
+    padding: 12px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
 .logo {
@@ -91,6 +90,7 @@ a {
     font-size: 1.3rem;
     font-weight: 800;
     letter-spacing: 2px;
+    flex-shrink: 0;
 }
 
 .nav-links {
@@ -109,10 +109,37 @@ a {
     color: var(--text-main);
 }
 
+/* --- SEARCH DANS LE HEADER --- */
 .nav-controls {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 20px;
+    gap: 10px;
+    max-width: 250px;
+    width: 100%;
+    flex-shrink: 1;
+}
+
+.search-container input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.search-container input::placeholder {
+    color: var(--text-muted);
+    font-size: 0.8rem;
 }
 
 .icon-btn {
@@ -127,6 +154,7 @@ a {
     height: 40px;
     border-radius: 50%;
     transition: 0.3s;
+    flex-shrink: 0;
 }
 
 .icon-btn:hover {
@@ -141,7 +169,7 @@ a {
     position: absolute;
     top: 2px;
     right: 2px;
-    background-color: #ff3b30; /* أحمر أبل */
+    background-color: #ff3b30;
     color: white;
     font-size: 0.7rem;
     font-weight: bold;
@@ -153,7 +181,6 @@ a {
     justify-content: center;
 }
 
-/* قوائم الاختيار (Select) ستايل أيفون */
 .apple-select {
     appearance: none;
     background-color: var(--glass-bg);
@@ -165,14 +192,62 @@ a {
     font-weight: 600;
     cursor: pointer;
     outline: none;
+    flex-shrink: 0;
 }
 
 /* ==========================================================================
-   5. STORE SECTION & TABS (الفلاتر والأقسام)
+   5. HERO SECTION
+   ========================================================================== */
+.hero-section {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('https://images.unsplash.com/photo-1550639525-c97d455acf70?w=1600') center/cover;
+    border-radius: 30px;
+    margin: 100px 30px 20px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    padding: 40px;
+    border-radius: 24px;
+    max-width: 600px;
+    animation: floating 3s ease-in-out infinite;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--accent-invert);
+}
+
+.btn-secondary {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+/* ==========================================================================
+   6. STORE SECTION & TABS
    ========================================================================== */
 .main-section {
     max-width: 1600px;
-    margin: 120px auto 50px auto;
+    margin: 50px auto;
     padding: 0 30px;
 }
 
@@ -232,12 +307,11 @@ a {
 }
 
 /* ==========================================================================
-   6. RESPONSIVE GRID (5 منتجات في الحاسوب)
+   7. RESPONSIVE GRID & 3D HOVER EFFECTS
    ========================================================================== */
 .grid-5-cols {
     display: grid;
-    /* السر كامل هنا: 5 خانات في الشاشات الكبيرة */
-    grid-template-columns: repeat(5, 1fr); 
+    grid-template-columns: repeat(5, 1fr);
     gap: 25px;
 }
 
@@ -247,11 +321,15 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.3s ease;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-15px) rotateX(5deg) rotateY(-5deg);
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
 .product-card img {
@@ -259,6 +337,11 @@ a {
     height: 250px;
     object-fit: cover;
     border-radius: 15px;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+    transform: translateZ(30px) scale(1.05);
 }
 
 .prod-info {
@@ -303,7 +386,7 @@ a {
 }
 
 /* ==========================================================================
-   7. SECTIONS (About & Contact)
+   8. SECTIONS (About & Contact)
    ========================================================================== */
 .about-section, .contact-section {
     max-width: 800px;
@@ -347,7 +430,7 @@ a {
 }
 
 .submit-btn {
-    background-color: #0071e3; /* أزرق أبل المميز */
+    background-color: #0071e3;
     color: white;
     padding: 15px;
     border: none;
@@ -363,7 +446,61 @@ a {
 }
 
 /* ==========================================================================
-   8. CHECKOUT MODALS (نظام الدفع المخفي)
+   9. CART DRAWER (السلة الجانبية)
+   ========================================================================== */
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 400px;
+    max-width: 100%;
+    height: 100vh;
+    z-index: 2000;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+}
+
+.cart-drawer.open {
+    right: 0;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    margin: 20px 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.delete-btn {
+    color: #ff3b30;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.total-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'Syne', sans-serif;
+}
+
+/* ==========================================================================
+   10. CHECKOUT MODALS
    ========================================================================== */
 .modal-overlay {
     position: fixed;
@@ -381,7 +518,7 @@ a {
 
 .modal-overlay.hidden {
     opacity: 0;
-    pointer-events: none; /* يمنع الضغط عليه وهو مخفي */
+    pointer-events: none;
 }
 
 .modal-box {
@@ -415,7 +552,7 @@ a {
 }
 
 /* ==========================================================================
-   9. FOOTER & NEWSLETTER
+   11. FOOTER & NEWSLETTER
    ========================================================================== */
 .main-footer {
     margin-top: 100px;
@@ -450,24 +587,41 @@ a {
 }
 
 /* ==========================================================================
-   10. MEDIA QUERIES (شاشات مختلفة)
+   12. ANIMATIONS
+   ========================================================================== */
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ==========================================================================
+   13. MEDIA QUERIES (شاشات مختلفة)
    ========================================================================== */
 @media (max-width: 1400px) {
-    .grid-5-cols { grid-template-columns: repeat(4, 1fr); } /* 4 في اللابتوب الصغير */
+    .grid-5-cols { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media (max-width: 1024px) {
-    .grid-5-cols { grid-template-columns: repeat(3, 1fr); } /* 3 في التابلت */
-    .nav-links { display: none; } /* إخفاء الروابط في التابلت */
+    .grid-5-cols { grid-template-columns: repeat(3, 1fr); }
+    .nav-links { display: none; }
+    .search-container { max-width: 200px; }
 }
 
 @media (max-width: 768px) {
-    .grid-5-cols { grid-template-columns: repeat(2, 1fr); } /* 2 في الهاتف */
+    .grid-5-cols { grid-template-columns: repeat(2, 1fr); }
     .input-group { flex-direction: column; }
     .store-header h2 { font-size: 2rem; }
+    .hero-section { height: 50vh; margin: 90px 15px 10px 15px; }
+    .hero-content { padding: 20px; }
+    .hero-buttons { flex-direction: column; gap: 10px; }
+    .cart-drawer { width: 100%; right: -100%; }
+    .cart-drawer.open { right: 0; }
+    .search-container { max-width: 150px; }
+    .nav-container { padding: 10px 15px; }
 }
 
 @media (max-width: 480px) {
-    .grid-5-cols { grid-template-columns: repeat(1, 1fr); } /* 1 في الهواتف الصغيرة جداً */
+    .grid-5-cols { grid-template-columns: repeat(1, 1fr); }
     .season-tabs { flex-direction: column; width: 100%; }
+    .search-container { display: none; } /* نخبي السيرش في الموبايل الصغير */
 }
