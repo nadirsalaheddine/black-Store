@@ -3,128 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Store | Premium Streetwear Hub</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Black Store | Global E-Commerce</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-dark apple-glass-bg"> <header class="navbar apple-blur">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h20L12 2zm0 6l5 10H7l5-10z"/></svg>
+                BLACK STORE
+            </a>
 
-    <header class="main-header">
-        <div class="header-container">
-            <div class="logo-area">
-                <a href="#" class="logo">
-                    <span class="logo-dot"></span>BLACK STORE
-                </a>
-            </div>
-
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#" class="nav-link active">Home</a></li>
-                    <li><a href="#" class="nav-link">New Drops</a></li>
-                    <li><a href="#" class="nav-link">Brands</a></li>
-                    <li><a href="#" class="nav-link">Aura Series</a></li>
-                </ul>
+            <nav class="nav-links">
+                <a href="#home" data-i18n="nav_home">Home</a>
+                <a href="#store" data-i18n="nav_store">Collections</a>
+                <a href="#about" data-i18n="nav_about">About Us</a>
+                <a href="#contact" data-i18n="nav_contact">Contact</a>
             </nav>
 
-            <div class="header-actions">
-                <button class="action-btn" aria-label="Search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="nav-controls">
+                <select id="lang-switcher" class="apple-select">
+                    <option value="en">ENG</option>
+                    <option value="fr">FRA</option>
+                    <option value="ar">عربي</option>
+                </select>
+                
+                <button id="theme-toggle" class="icon-btn">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
                 </button>
-                <button class="action-btn cart-trigger" id="open-cart-btn">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="cart-badge" id="cart-count">0</span>
+
+                <button id="cart-open-btn" class="icon-btn cart-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span id="cart-counter" class="badge">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <section class="hero-section">
-        <div class="hero-content">
-            <span class="hero-tag">Summer Drop 2026</span>
-            <h2 class="hero-title">SHAPE THE FUTURE <br>OF STREETWEAR</h2>
-            <p class="hero-subtitle">Explore carefully curated premium aesthetics tailored for the modern generation.</p>
-            <div class="hero-buttons">
-                <a href="#store-section" class="btn btn-primary">Shop The Collection</a>
-                <a href="#" class="btn btn-secondary">Discover Lookbook</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="features-section">
-        <div class="features-container">
-            <div class="feature-card">
-                <i class="fa-solid fa-truck-fast"></i>
-                <h3>Express Delivery</h3>
-                <p>Fast and tracked shipping right to your doorstep.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h3>Secure Checkout</h3>
-                <p>Your transactions are fully encrypted and safe.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-gem"></i>
-                <h3>Premium Quality</h3>
-                <p>Only 100% authentic and verified luxury pieces.</p>
-            </div>
-        </div>
-    </section>
-
-    <main class="store-wrapper" id="store-section">
+    <section id="store" class="main-section">
         <div class="store-header">
-            <div class="section-heading">
-                <h2 class="section-title">Curated Drops</h2>
-                <p class="section-desc">Handpicked styles from High Streetwear to Old Money trends.</p>
+            <h2 data-i18n="store_title">Global Collections</h2>
+            
+            <div class="season-tabs apple-blur">
+                <button class="season-tab active" data-season="summer" data-i18n="tab_summer">Summer Drop</button>
+                <button class="season-tab" data-season="winter" data-i18n="tab_winter">Winter Essentials</button>
             </div>
-            <div class="store-filters">
-                <button class="filter-btn active">All Items</button>
-                <button class="filter-btn">Nike</button>
-                <button class="filter-btn">Adidas</button>
-                <button class="filter-btn">High Street</button>
+
+            <div class="category-tabs">
+                <button class="cat-tab active" data-cat="all" data-i18n="cat_all">All</button>
+                <button class="cat-tab" data-cat="clothing" data-i18n="cat_clothing">Clothing</button>
+                <button class="cat-tab" data-cat="shoes" data-i18n="cat_shoes">Footwear</button>
+                <button class="cat-tab" data-cat="accessories" data-i18n="cat_acc">Accessories</button>
+                <button class="cat-tab" data-cat="underwear" data-i18n="cat_under">Underwear</button>
             </div>
         </div>
 
-        <div class="products-grid" id="products-target">
+        <div id="products-grid" class="grid-5-cols">
+            <div class="product-card apple-blur">
+                <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=500" alt="Nike Tee">
+                <div class="prod-info">
+                    <h3>Nike Premium Summer Tee</h3>
+                    <p class="price">$45.00</p>
+                    <select class="size-selector apple-select">
+                        <option value="">Select Size</option>
+                        <option value="XXS">XXS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                    </select>
+                    <button class="add-to-cart-btn" data-i18n="btn_add">Order Now</button>
+                </div>
             </div>
-    </main>
 
-    <aside class="cart-sidebar" id="cart-drawer">
-        <div class="cart-sidebar-header">
-            <h2>Your Bag (<span id="cart-total-items">0</span>)</h2>
-            <button class="close-cart-btn" id="close-cart-btn">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        
-        <div class="cart-items-container" id="cart-items-target">
-            <div class="empty-cart-msg">
-                <i class="fa-solid fa-basket-shopping"></i>
-                <p>Your bag is currently empty.</p>
+            <div class="product-card apple-blur">
+                <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500" alt="Adidas Boost">
+                <div class="prod-info">
+                    <h3>Adidas UltraBoost</h3>
+                    <p class="price">$180.00</p>
+                    <select class="size-selector apple-select">
+                        <option value="">Select Shoe Size</option>
+                        <option value="US8">US 8 / EU 41</option>
+                        <option value="US9">US 9 / EU 42.5</option>
+                        <option value="US10">US 10 / EU 44</option>
+                    </select>
+                    <button class="add-to-cart-btn" data-i18n="btn_add">Order Now</button>
+                </div>
             </div>
-        </div>
-
-        <div class="cart-sidebar-footer">
-            <div class="cart-total-row">
-                <span>Subtotal</span>
-                <span class="total-price-amount" id="cart-total-price">$0.00</span>
             </div>
-            <button class="btn btn-checkout" disabled>Proceed to Checkout</button>
-        </div>
-    </aside>
+    </section>
 
-    <footer class="main-footer">
+    <section id="about" class="about-section apple-blur">
+        <h2 data-i18n="about_title">Who Are We?</h2>
+        <p data-i18n="about_desc">We are Black Store, the pinnacle of modern streetwear. Bridging the gap between High Fashion and everyday lifestyle with curated pieces from top global brands like Nike, Adidas, and Puma.</p>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 data-i18n="contact_title">Get In Touch</h2>
+        <form id="contact-form" class="apple-blur">
+            <div class="input-group">
+                <input type="text" id="fname" placeholder="First Name" required>
+                <input type="text" id="lname" placeholder="Last Name" required>
+            </div>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" rows="4" placeholder="How can we help you?" required></textarea>
+            <button type="submit" class="submit-btn" data-i18n="btn_send">Send Message</button>
+        </form>
+    </section>
+
+    <div id="checkout-overlay" class="modal-overlay hidden apple-blur">
+        <div class="modal-box">
+            <h2 data-i18n="checkout_info">Shipping Information</h2>
+            <form id="shipping-form">
+                <input type="text" placeholder="Full Name" required class="apple-input">
+                <input type="text" placeholder="Address / Location" required class="apple-input">
+                <input type="tel" placeholder="Phone Number" required class="apple-input">
+                
+                <h3 data-i18n="payment_method" class="mt-4">Payment Method</h3>
+                <div class="payment-options">
+                    <label class="pay-radio">
+                        <input type="radio" name="payment" value="cod" checked> 
+                        <span data-i18n="pay_cod">Cash on Delivery (COD)</span>
+                    </label>
+                    <label class="pay-radio">
+                        <input type="radio" name="payment" value="card"> 
+                        <span data-i18n="pay_card">Credit Card</span>
+                    </label>
+                </div>
+                
+                <button type="button" id="proceed-payment-btn" class="submit-btn" data-i18n="btn_confirm">Confirm Order</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="credit-card-modal" class="modal-overlay hidden apple-blur">
+        <div class="modal-box">
+            <h2 data-i18n="card_details">Enter Card Details</h2>
+            <input type="text" placeholder="Card Number (xxxx-xxxx-xxxx-xxxx)" class="apple-input">
+            <div class="input-group">
+                <input type="text" placeholder="MM/YY" class="apple-input">
+                <input type="text" placeholder="CVC" class="apple-input">
+            </div>
+            <button type="button" id="pay-now-btn" class="submit-btn">Pay Securely</button>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal-overlay hidden apple-blur">
+        <div class="modal-box success-box text-center">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h2 data-i18n="thank_you_title">Thank You For Trusting Us!</h2>
+            <p data-i18n="thank_you_desc">Your premium order has been successfully placed. We are preparing it for shipment.</p>
+            <button type="button" id="close-success-btn" class="submit-btn">Continue Shopping</button>
+        </div>
+    </div>
+
+    <footer class="main-footer apple-blur">
+        <div class="newsletter">
+            <h3 data-i18n="newsletter_title">Join The Elite</h3>
+            <p data-i18n="newsletter_desc">Subscribe to get early access to new drops and exclusive sales.</p>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Enter your email" required class="apple-input">
+                <button type="submit" data-i18n="btn_subscribe">Subscribe</button>
+            </form>
+        </div>
         <div class="footer-bottom">
-            <p>Designed with absolute precision by <strong>nadirsalahddine</strong> &copy; 2026</p>
-            <div class="footer-socials">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-            </div>
+            <p>&copy; 2026 Designed with precision by nadirsalahddine.</p>
         </div>
     </footer>
 
