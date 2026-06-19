@@ -7,7 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-dark apple-glass-bg"> <header class="navbar apple-blur">
+<body class="theme-dark apple-glass-bg">
+
+    <header class="navbar apple-blur">
         <div class="nav-container">
             <a href="#home" class="logo">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h20L12 2zm0 6l5 10H7l5-10z"/></svg>
@@ -22,6 +24,12 @@
             </nav>
 
             <div class="nav-controls">
+                <!-- SEARCH BAR (من الكود الثاني) -->
+                <div class="search-container apple-blur">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="search-input" placeholder="Search for High Streetwear, Shoes..." data-i18n="search_placeholder">
+                </div>
+
                 <select id="lang-switcher" class="apple-select">
                     <option value="en">ENG</option>
                     <option value="fr">FRA</option>
@@ -39,6 +47,18 @@
             </div>
         </div>
     </header>
+
+    <!-- HERO SECTION (من الكود الثاني) -->
+    <section id="home" class="hero-section">
+        <div class="hero-content apple-blur">
+            <h1 class="glitch-effect">BLACK STORE</h1>
+            <p data-i18n="hero_desc">Step into the future of High Streetwear and Old Money aesthetics. Premium quality, exclusive drops.</p>
+            <div class="hero-buttons">
+                <a href="#store" class="btn-primary" data-i18n="btn_shop">Shop Now</a>
+                <a href="#about" class="btn-secondary" data-i18n="btn_about">About Us</a>
+            </div>
+        </div>
+    </section>
 
     <section id="store" class="main-section">
         <div class="store-header">
@@ -89,7 +109,7 @@
                     <button class="add-to-cart-btn" data-i18n="btn_add">Order Now</button>
                 </div>
             </div>
-            </div>
+        </div>
     </section>
 
     <section id="about" class="about-section apple-blur">
@@ -109,6 +129,23 @@
             <button type="submit" class="submit-btn" data-i18n="btn_send">Send Message</button>
         </form>
     </section>
+
+    <!-- CART DRAWER (من الكود الثاني) -->
+    <div id="cart-drawer" class="cart-drawer apple-blur">
+        <div class="cart-header">
+            <h2 data-i18n="cart_title">Your Bag</h2>
+            <button id="close-cart-btn" class="icon-btn">&times;</button>
+        </div>
+        <div id="cart-items-container" class="cart-items">
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-i18n="cart_total">Total:</span>
+                <span id="cart-total-price" class="total-price">$0.00</span>
+            </div>
+            <button id="cart-checkout-btn" class="submit-btn checkout-btn" data-i18n="btn_checkout">Proceed to Checkout</button>
+        </div>
+    </div>
 
     <div id="checkout-overlay" class="modal-overlay hidden apple-blur">
         <div class="modal-box">
