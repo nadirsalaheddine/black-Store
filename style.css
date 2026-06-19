@@ -1,87 +1,26 @@
-:root {
-    --bg-base: #0c0b0c;
-    --panel-bg: rgba(22, 19, 20, 0.75);
-    --border-color: rgba(255, 255, 255, 0.05);
-    --text-main: #fdfbf7;
-    --text-muted: #9e9698;
-    
-    /* ألوان نادير الملكية */
-    --color-burgundy: #581c26; 
-    --color-olive: #4a5343;     
-    --color-orange: #d96a3b;    
-    --color-yellow: #fbf3cd;    
-    
-    /* حواف دائرية خفيفة وناعمة (ليست مربعات حادة) */
-    --radius-card: 16px; 
-    --radius-btn: 10px;
-}
-
-[data-theme="light"] {
-    --bg-base: #faf8f5;
-    --panel-bg: rgba(243, 238, 232, 0.85);
-    --border-color: rgba(0, 0, 0, 0.06);
-    --text-main: #1c1819;
-    --text-muted: #787274;
-    
-    --color-burgundy: #7a2230;
-    --color-olive: #5a6653;
-    --color-orange: #c85324;
-    --color-yellow: #f7eda2;
-}
-
-* {
-    font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
-    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                color 0.3s ease, 
-                border-color 0.3s ease;
-}
-
-body {
-    background-color: var(--bg-base);
-    color: var(--text-main);
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-/* تأثير التفاعل الخفيف والارتدادي السريع (Micro-interactions) عند الضغط */
-.btn-bounce {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s, border-color 0.3s;
-}
-.btn-bounce:active {
-    transform: scale(0.94) !important;
-}
-
-.custom-card {
-    background: var(--panel-bg);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-card);
+/* تأثير الزجاج الفخم */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* أنيميشن نبضي لشاشات التحميل الذكية (CSS3 Animation) */
-.skeleton-pulse {
-    background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+/* تأثير الارتداد عند الضغط على الأزرار */
+.btn-bounce {
+    transition: transform 0.1s ease;
+}
+.btn-bounce:active {
+    transform: scale(0.94);
+}
+
+/* أنيميشن الشحن (Skeleton Loader) */
+@keyframes skeleton-glow {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+.skeleton {
+    background: linear-gradient(90deg, #121212 25%, #1c1c1c 50%, #121212 75%);
     background-size: 200% 100%;
-    animation: loading-pulse 1.5s infinite linear;
-    border-radius: var(--radius-card);
+    animation: skeleton-glow 1.5s infinite;
 }
-[data-theme="light"] .skeleton-pulse {
-    background: linear-gradient(90deg, rgba(0,0,0,0.03) 25%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.03) 75%);
-    background-size: 200% 100%;
-}
-
-@keyframes loading-pulse {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-/* حركة دوران شعار البراند */
-.brand-spinner {
-    border: 2px solid var(--color-olive);
-    border-top: 2px solid var(--color-orange);
-    border-bottom: 2px solid var(--color-burgundy);
-    border-radius: 50%;
-    animation: spin 3.5s linear infinite;
-}
-@keyframes spin { 100% { transform: rotate(360deg); } }
